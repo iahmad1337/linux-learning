@@ -1,3 +1,9 @@
+# New
+- This is based on bjnet guide: https://beej.us/guide/bgnet/html/split-wide/index.html
+
+# Old contents
+- based on a random book I found some time ago in library at my workplace
+
 /etc/services
 inetd - demon that needs to ve working if I want to test my programs offline
 1) Создание сокета 2) Поиск адресата 3) организация канала связи 4) разрыв
@@ -114,7 +120,7 @@ bytes_read = recvfrom(sd, buffer, sizeof(buffer), 0, 0, 0);
 `ETH_P802_3` и т.д. Но зато есть один человеческий фильтр `ETH_ALL` (автор
 говорит быть с ним осторожным).
 Фулл прога называется `snooper.c`, можно посмотреть.
-SOCK_PACKET - readonly сокет апаратного уровня. 
+SOCK_PACKET - readonly сокет апаратного уровня.
 
 Закончил третью главу, страница 78
 
