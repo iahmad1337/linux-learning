@@ -1,4 +1,4 @@
-all: solution
+all: libsolution.so
 
 libsolution.so:
 	gcc -c -o libsolution.so -fPIC -shared solution.c
