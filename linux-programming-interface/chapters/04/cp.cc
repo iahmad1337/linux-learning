@@ -28,22 +28,6 @@ int main(int argc, char** argv) {
     if (optind > argc) exit(EXIT_FAILURE);
 
     out_file = argv[optind];
-
-
-
-#define BUF_SIZE 1024
-#define FILEPERMS (S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)
-
-    char buf[BUF_SIZE];
-    int fd = open(out_file, open_flags, FILEPERMS);
-    int bytes_read;
-    while ((bytes_read = read(STDIN_FILENO, buf, BUF_SIZE)) > 0) {
-        write(fd, buf, bytes_read);
-        write(STDOUT_FILENO, buf, bytes_read);
-    }
-    close(fd);
-    if (bytes_read == -1) {
-        exit(1);  // TODO: report error somehow
-    }
     return 0;
 }
+
