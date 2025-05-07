@@ -1,9 +1,11 @@
-cmake_minimum_required(VERSION 3.12) # Ensure compatibility with your CMake version
+cmake_minimum_required(VERSION 3.12)
 project(tlpi-04 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+set(CMAKE_CXX_FLAGS -g)
 
 # Define the first executable
 add_executable(tee tee.c)

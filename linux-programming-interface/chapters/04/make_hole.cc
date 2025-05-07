@@ -124,10 +124,5 @@ int main(int argc, char** argv) {
         is_hole = !is_hole;
     }
     close(out_fd);
-
-    // Compact the actual file
-    char buf[1024];
-    sprintf(buf, "fallocate -d %s", out_file);
-    system(buf);
     return 0;
 }
