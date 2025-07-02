@@ -1,13 +1,5 @@
-cmake_minimum_required(VERSION 3.12)
 project(tlpi-04 LANGUAGES C CXX)
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_C_STANDARD 99)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(CMAKE_CXX_FLAGS -g)
-
-# Define the first executable
 add_executable(tee tee.c)
 add_executable(cp cp.cc)
 add_executable(make_hole make_hole.cc)
@@ -20,5 +12,5 @@ install(
         make_hole
         wc
     DESTINATION
-        bin
+        ${CMAKE_CURRENT_LIST_DIR}/bin
 )

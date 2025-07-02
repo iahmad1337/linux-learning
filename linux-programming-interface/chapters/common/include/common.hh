@@ -22,10 +22,6 @@ struct file_guard {
 };
 
 /// alternative to `tell` function
-inline off_t get_offset(int fd) {
-    return lseek(fd, 0, SEEK_CUR);
-}
+off_t get_offset(int fd);
 
-inline bool is_fd_open(int fd) {
-    return fcntl(fd, F_GETFL) != EBADF;
-}
+bool is_fd_open(int fd);
