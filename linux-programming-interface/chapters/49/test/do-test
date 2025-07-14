@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+if [ ! -f "../bin/01-cp-mmap" ]; then
+    echo do-test should be launched inside of test directory
+fi
+
+function fail() {
+    echo $@
+    exit 1
+}
+
+for test_file in *.rnd; do
+    ../bin/01-cp-mmap "$test_file" "$test_file.copy" || fail failed copy
+    cmp "$test_file" "$test_file.copy" || fail failed comparison
+done
+
+echo SUCCESS

@@ -3,6 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
+#include <string>
 
 #define REGULAR_FILE_PERMS (S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)
 
@@ -25,3 +26,5 @@ struct file_guard {
 off_t get_offset(int fd);
 
 bool is_fd_open(int fd);
+
+std::string get_rss_status(void* addr, off_t length);

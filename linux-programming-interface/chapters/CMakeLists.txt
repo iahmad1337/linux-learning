@@ -13,4 +13,5 @@ add_subdirectory(common)
 # Then, the chapters
 add_subdirectory(04)
 add_subdirectory(05)
+add_subdirectory(49)
 add_subdirectory(50)
