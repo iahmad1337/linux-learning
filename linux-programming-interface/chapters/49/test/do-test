@@ -14,4 +14,6 @@ for test_file in *.rnd; do
     cmp "$test_file" "$test_file.copy" || fail failed comparison
 done
 
+../bin/03-mmap-signals || fail failed signals
+
 echo SUCCESS

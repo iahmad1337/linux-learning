@@ -10,4 +10,7 @@
  1380  [2025-07-14 22:07:18] cd ..
  1381  [2025-07-14 22:07:20] cmake --build build --target install
  1382  [2025-07-14 22:07:43] (cd 49/test/; ./do-test)
+ 1395  [2025-07-14 22:25:05] hexdump -C -n100 49/test/one-page.rnd
+ 1396  [2025-07-14 22:25:13] hexdump -C -n100 49/test/one-page.rnd.copy
+ 1397  [2025-07-14 22:26:02] cmake --build build --target install && (cd 49/test/; ./do-test)
 ```
