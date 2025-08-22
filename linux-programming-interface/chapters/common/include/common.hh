@@ -28,3 +28,9 @@ off_t get_offset(int fd);
 bool is_fd_open(int fd);
 
 std::string get_rss_status(void* addr, off_t length);
+
+template<class ...Args>
+void report_error(char const* format, Args&&... args) {
+    printf(format, std::forward<Args>(args)...);
+    exit(1);
+}
