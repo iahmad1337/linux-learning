@@ -92,3 +92,24 @@ Unblocking signals and waiting for their handling...
 
 [1]+  Trace/breakpoint trap   ./20/bin/02-sig-ignore 60
 ```
+
+## 03. SA_NODEFER
+Here we check that the signal handler may be called when we already inside of
+one:
+```
+$ ./20/bin/03-nodefer 30 &
+[1] 126747
+./20/bin/03-nodefer: PID is 126747
+$ kill -2 126747
+The current call is 1
+Sleeping for 20 seconds inside handler, please send another one
+$ kill -2 126747
+The current call is 2
+Successfully observed second entry to signal handler
+Finished without interruptions
+[1]+  Done                    ./20/bin/03-nodefer 30
+```
+If we were to skip SA_NODEFER flag, the second `kill` would be added to thread
+mask during the execution of signal handler and it would be remaining in pending
+state (i.e. the handler for the pending signal would be called after it gets
+unblocked upon curent handler finish - checked this manually).
