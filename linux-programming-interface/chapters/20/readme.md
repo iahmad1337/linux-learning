@@ -1,3 +1,16 @@
+The signal mask can be viewed via `/proc/<PID>/status` in the following fields:
+```
+SigPnd: 0000000000000000
+ShdPnd: 0000000000000000
+SigBlk: 0000000000000000
+SigIgn: 0000000000300000
+SigCgt: 00000000480854ee
+```
+Where
+> SigPnd (per-thread pending signals), ShdPnd (process-wide pending
+> signals; since Linux 2.6), SigBlk (blocked signals), SigIgn (ignored signals), and
+> SigCgt (caught signals)
+> -- tlpi 20.1
 # Testing
 ## 01. send-receive
 ```
@@ -36,4 +49,46 @@ $ ./20/bin/01-sig-sender 26722 100 18 2
 ./20/bin/01-sig-receiver: signal 23 caught 1 time
 ./20/bin/01-sig-sender: exiting
 [1]+  Done                    ./20/bin/01-sig-receiver 40
+```
+=======
+
+## 02. SIG_IGNORE
+With default signal handler (SIG_DFL) we see that pending signals are handled in
+a standard manner when unblocked:
+```
+ 1565  [2025-08-28 21:46:46] ./20/bin/02-sig-ignore 60 D &
+ 1566  [2025-08-28 21:46:54] ./20/bin/01-sig-sender 122934 100 15
+ 1567  [2025-08-28 21:47:01] ./20/bin/01-sig-sender 122934 8 11
+ 1568  [2025-08-28 21:47:05] ./20/bin/01-sig-sender 122934 1 2
+ 1569  [2025-08-28 21:47:14] ./20/bin/01-sig-sender 122934 13 14
+```
+the finish:
+```
+$     2 (Interrupt)
+    11 (Segmentation fault)
+    14 (Alarm clock)
+    15 (Terminated)
+Unblocking signals and waiting for their handling...
+
+[1]+  Segmentation fault      ./20/bin/02-sig-ignore 60 D
+```
+
+With SIG_IGN, however, the pending signals, when unblocked, are just ignored and
+program successfelly finishes as if nothing happened:
+```
+ 1572  [2025-08-28 21:52:36] ./20/bin/02-sig-ignore 60 &
+ 1573  [2025-08-28 21:52:45] ./20/bin/01-sig-sender 123184 8 11
+ 1574  [2025-08-28 21:52:48] ./20/bin/01-sig-sender 123184 14 15
+ 1575  [2025-08-28 21:52:57] ./20/bin/01-sig-sender 123184 11 2
+ 1576  [2025-08-28 21:53:14] ./20/bin/01-sig-sender 123184 6 5
+```
+& the finish:
+```
+$     2 (Interrupt)
+    5 (Trace/breakpoint trap)
+    11 (Segmentation fault)
+    15 (Terminated)
+Unblocking signals and waiting for their handling...
+
+[1]+  Trace/breakpoint trap   ./20/bin/02-sig-ignore 60
 ```
