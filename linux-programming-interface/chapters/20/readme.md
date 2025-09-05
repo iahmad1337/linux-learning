@@ -113,3 +113,5 @@ If we were to skip SA_NODEFER flag, the second `kill` would be added to thread
 mask during the execution of signal handler and it would be remaining in pending
 state (i.e. the handler for the pending signal would be called after it gets
 unblocked upon curent handler finish - checked this manually).
+
+## 03. SA_RESETHAND
