@@ -23,7 +23,7 @@ static void sigbus_handler(int sig)
 int main(int argc, char** argv) {
     const auto PAGE_SIZE = sysconf(_SC_PAGESIZE);
 
-    std::vector<char> file_contents;
+    std::vector<char> file_contents;
     file_contents.assign(PAGE_SIZE * 10, 'o');
     file_contents.back() = 0;
     file_guard fg{"test.txt", file_contents.data()};
