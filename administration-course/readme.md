@@ -39,3 +39,16 @@ TODO: watch the tutorials
 - https://www.youtube.com/watch?v=773PhMgEOFw
 - firmware reversing: https://www.youtube.com/watch?v=50lFwNvHbDs
 
+# Launching the vm
+The most straightforward way:
+```
+qemu-system-x86_64 \
+  -m 2048 \
+  -cpu host \
+  -smp 2 \
+  -drive file=./debian-ovf-extracted/debian-12.qcow2,format=qcow2 \
+  -enable-kvm
+```
+*Note*: -nographic won't work at all! The boot will hang
+
+The changes in VM image are persistent!
